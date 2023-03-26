@@ -54,3 +54,4 @@ dkms.conf
 
 # Ignore bin directory
 */bin/*
+bin/
