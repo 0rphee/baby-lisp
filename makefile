@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -ledit
 TARGET = bin/bb-lisp
-SRC = main.c
+SRC = main.c mpc.c
 
 all: $(TARGET)
 
