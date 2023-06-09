@@ -262,16 +262,18 @@ int main(int argc, char **argv){
     mpc_parser_t *Number   = mpc_new("number");
     mpc_parser_t *Symbol   = mpc_new("symbol");
     mpc_parser_t *Sexpr    = mpc_new("sexpr");
+    mpc_parser_t *Qexpr   = mpc_new("qexpr");
     mpc_parser_t *Expr     = mpc_new("expr");
     mpc_parser_t *Bblisp   = mpc_new("bblisp");
 
     mpca_lang(MPCA_LANG_DEFAULT,
-        "                                                         \
-          number   : /-?[0-9]+/ ;                                 \
-          symbol   : '+' | '-' | '*' | '/' | \"min\" | \"max\";   \
-          sexpr    : '(' <expr>* ')' ;                            \
-          expr     : <number> | <symbol> | <sexpr>  ;             \
-          bblisp   : /^/ <expr>* /$/ ;                            \
+        "                                                       \
+          number : /-?[0-9]+/ ;                                 \
+          symbol : '+' | '-' | '*' | '/' | \"min\" | \"max\";   \
+          sexpr  : '(' <expr>* ')' ;                            \
+          qexpr  : '{' <expr>* '}' ;                            \
+          expr   : <number> | <symbol> | <sexpr>  ;             \
+          bblisp : /^/ <expr>* /$/ ;                            \
         ", 
         Number, Symbol, Sexpr, Expr, Bblisp);
      // END OF LANGUAGE GRAMMAR
@@ -302,7 +304,8 @@ int main(int argc, char **argv){
         free(input);
     }
 
-    mpc_cleanup(5, Number, Symbol, Sexpr, Expr, Bblisp);
+    mpc_cleanup(6, Number, Symbol, Sexpr, Qexpr, Expr, Bblisp);
+
 
     return 0;
 }
